@@ -1,0 +1,269 @@
+@font-face {
+  font-family: headingFont;
+  src: url(Assets/heading_font.otf);
+}
+@font-face {
+  font-family: cupcake;
+  src: url(Assets/Cupcake.otf);
+}
+#logo {
+  width: 50px;
+  height: 70px;
+}
+#header {
+  font-family: headingFont;
+  color: beige;
+  font-size: 70px;
+}
+
+body {
+  background-color: #2ec194;
+  text-align: center;
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+
+#addtask {
+  width: 50px;
+  height: 50px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+  background-image: url("Assets/addTask.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#addtask:hover {
+  background-color: greenyellow;
+}
+#addtask:active {
+  background-color: green;
+}
+
+#delete_all {
+  width: 50px;
+  height: 50px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+  background-image: url("Assets/delAll.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#delete_all:hover {
+  background-color: red;
+}
+#delete_all:active {
+  background-color: maroon;
+}
+
+#tasks {
+  width: 150vh;
+  display: relative; /* set to 'block' in case of error */
+  justify-items: center;
+  height: 70vh;
+  background-color: white;
+  position: absolute;
+  box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 50px;
+  margin-top: 145px;
+  background-image: url("Assets/page.jpg");
+  background-size: cover;
+  background-position: center;
+  overflow-y: hidden;
+}
+
+#tasks {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+#tasks::-webkit-scrollbar {
+  width: 5px;
+}
+#tasks::-webkit-scrollbar-track {
+  box-shadow: inset 2px 2px 10px rgba(199, 199, 199, 0.8);
+  border-radius: 10px;
+}
+#tasks::-webkit-scrollbar-thumb {
+  background: #5a5a5a;
+  border-radius: 10px;
+}
+#tasks::-webkit-scrollbar-thumb:hover {
+  background: hsl(316, 100%, 77%);
+}
+
+.taskItems {
+  margin-left: 27px;
+  margin-right: 27px;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: solid 4px;
+  display: relative;
+  height: 40px;
+  font-family: cupcake;
+  font-size: 33px;
+  cursor: crosshair;
+}
+.task_text {
+  position: absolute;
+  left: 60px;
+}
+
+.option_buttons {
+  position: absolute;
+  right: 40px;
+}
+.taskdelbutton {
+  margin-right: 10px;
+  font-family: cursive;
+  border-radius: 7px;
+  font-size: 25px;
+  font-weight: bold;
+  color: brown;
+  cursor: pointer;
+}
+.taskeditbutton {
+  margin-right: 10px;
+  font-family: cursive;
+  border-radius: 7px;
+  font-size: 25px;
+  font-weight: bold;
+  color: brown;
+  cursor: pointer;
+}
+.taskviewbutton {
+  margin-right: 10px;
+  font-family: cursive;
+  border-radius: 7px;
+  font-size: 25px;
+  font-weight: bold;
+  color: brown;
+  cursor: pointer;
+}
+
+.popup {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px black;
+  position: relative;
+}
+
+#popupid {
+  font-size: 40px;
+  font-weight: 20px;
+  position: absolute;
+  left: 190px;
+  font-family: headingFont;
+}
+#closepopup {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  position: absolute;
+  left: 0px;
+  border-radius: 10px;
+  font-family: cupcake;
+}
+
+#form {
+  position: absolute;
+  left: 140px;
+  top: 100px;
+}
+#popup_editid {
+  font-size: 40px;
+  font-weight: 20px;
+  position: absolute;
+  left: 200px;
+  font-family: headingFont;
+}
+
+#popup1 {
+  width: 90vh;
+  height: 50vh;
+  background-color: grey;
+  margin-top: 10px;
+  display: none;
+}
+.labels {
+  font-family: headingFont;
+  font-size: 28px;
+}
+#inputString {
+  border-radius: 10px;
+}
+#priority {
+  border-radius: 10px;
+}
+#selectedDate {
+  border-radius: 10px;
+}
+
+#delallpopup {
+  width: 50vh;
+  height: 35vh;
+  background-color: grey;
+  display: none;
+}
+
+.unibuttons {
+  display: block;
+}
+
+#taskdelbutton {
+  cursor: pointer;
+}
+
+#edittask {
+  display: none;
+  font-family: cupcake;
+  font-size: 40px;
+}
+#savetask {
+  display: block;
+  font-family: cupcake;
+  font-size: 40px;
+}
+#popupid {
+  display: block;
+}
+#popup_editid {
+  display: none;
+  font-size: 30px;
+}
+
+/*delete-all popup and buttons */
+#delallpopup {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px black;
+  font-family: headingFont;
+  font-size: 35px;
+}
+#yestodel {
+  font-family: cupcake;
+  font-size: 40px;
+}
+#notodel {
+  font-family: cupcake;
+  font-size: 40px;
+}
+
+/* viewtask popup and close button */
+#viewtasks {
+  margin-top: 30px;
+  display: none;
+
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px black;
+  background-color: beige;
+  font-family: cupcake;
+  font-size: 30px;
+  color: black;
+}
+#closevietasks {
+  border-radius: 10px;
+  background-color: red;
+  font-family: cupcake;
+  cursor: pointer;
+  border: 2px solid black;
+}
