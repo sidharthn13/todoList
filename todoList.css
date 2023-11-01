@@ -24,7 +24,7 @@ body {
   justify-items: center;
 }
 
-#addtask {
+#add_task_button {
   width: 50px;
   height: 50px;
   background-color: whitesmoke;
@@ -34,10 +34,10 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
 }
-#addtask:hover {
+#add_task_button:hover {
   background-color: greenyellow;
 }
-#addtask:active {
+#add_task_button:active {
   background-color: green;
 }
 
@@ -114,7 +114,7 @@ body {
   position: absolute;
   right: 40px;
 }
-.taskdelbutton {
+.task_del_button {
   margin-right: 10px;
   font-family: cursive;
   border-radius: 7px;
@@ -123,7 +123,7 @@ body {
   color: brown;
   cursor: pointer;
 }
-.taskeditbutton {
+.task_edit_button {
   margin-right: 10px;
   font-family: cursive;
   border-radius: 7px;
@@ -132,7 +132,7 @@ body {
   color: brown;
   cursor: pointer;
 }
-.taskviewbutton {
+.task_view_button {
   margin-right: 10px;
   font-family: cursive;
   border-radius: 7px;
@@ -148,14 +148,14 @@ body {
   position: relative;
 }
 
-#popupid {
+#add_task_popup {
   font-size: 40px;
   font-weight: 20px;
   position: absolute;
   left: 190px;
   font-family: headingFont;
 }
-#closepopup {
+#close_popup_button {
   width: 40px;
   height: 40px;
   font-size: 20px;
@@ -170,7 +170,7 @@ body {
   left: 140px;
   top: 100px;
 }
-#popup_editid {
+#edit_task_popup {
   font-size: 40px;
   font-weight: 20px;
   position: absolute;
@@ -189,7 +189,7 @@ body {
   font-family: headingFont;
   font-size: 28px;
 }
-#inputString {
+#input-string {
   border-radius: 10px;
 }
 #priority {
@@ -199,57 +199,53 @@ body {
   border-radius: 10px;
 }
 
-#delallpopup {
+#delete_all_tasks_popup {
   width: 50vh;
   height: 35vh;
   background-color: grey;
   display: none;
 }
 
-.unibuttons {
+.main_buttons {
   display: block;
 }
 
-#taskdelbutton {
-  cursor: pointer;
-}
-
-#edittask {
+#edit_task {
   display: none;
   font-family: cupcake;
   font-size: 40px;
 }
-#savetask {
+#save_task {
   display: block;
   font-family: cupcake;
   font-size: 40px;
 }
-#popupid {
+#add_task_popup {
   display: block;
 }
-#popup_editid {
+#edit_task_popup {
   display: none;
   font-size: 30px;
 }
 
 /*delete-all popup and buttons */
-#delallpopup {
+#delete_all_tasks_popup {
   border-radius: 10px;
   box-shadow: 0px 0px 10px black;
   font-family: headingFont;
   font-size: 35px;
 }
-#yestodel {
+#yes_to_delete_prompt {
   font-family: cupcake;
   font-size: 40px;
 }
-#notodel {
+#no_to_delete_prompt {
   font-family: cupcake;
   font-size: 40px;
 }
 
-/* viewtask popup and close button */
-#viewtasks {
+/* view task popup and close button */
+#view_tasks {
   margin-top: 30px;
   display: none;
 
@@ -260,7 +256,7 @@ body {
   font-size: 30px;
   color: black;
 }
-#closevietasks {
+#close_view_tasks {
   border-radius: 10px;
   background-color: red;
   font-family: cupcake;
