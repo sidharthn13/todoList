@@ -1,154 +1,190 @@
 tasks = document.getElementById("tasks");
 let index;
 let data = [];
+
+if (localStorage.getItem("data") != null) {
+  data = JSON.parse(localStorage.getItem("data"));
+
+  tasks.innerHTML = "";
+  data.map((x, y) => {
+    tasks.innerHTML += `<div class = 'taskItems' id =${y}><span id ="task_text${y}" class="task_text" onclick='change_task_status(${y})'>
+    ${x.title}</span>
+    <span class="option_buttons">
+            <span class = 'task_view_button' onclick = 'view_task(${y})'>View</span>
+            <span class ='task_del_button' onclick = 'delete_individual_tasks(${y})'>X</span>
+            <span class = 'task_edit_button' onclick="edit_task(${y})">Edit</span>
+
+    </span>
+     </div>`;
+
+    //setting color based on priority
+    if (x.priority == "high") {
+      document.getElementById(y).style.borderBlockColor = "red";
+    } else if (x.priority == "medium") {
+      document.getElementById(y).style.borderBlockColor = "orange";
+    } else if (x.priority == "low") {
+      document.getElementById(y).style.borderBlockColor = "grey";
+    }
+    if (x.status == "Complete") {
+      document.getElementById(`task_text${y}`).style.textDecoration =
+        "line-through";
+      document.getElementById(`task_text${y}`).style.fontStyle = "italic";
+    }
+  });
+}
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  addtask();
+  add_task();
 });
 
 //clear all input fields
-function clear_fields() {
-  document.getElementById("inputString").value = "";
+function clear_input_fields() {
+  document.getElementById("input-string").value = "";
   document.getElementById("priority").value = "";
   document.getElementById("selectedDate").value = "";
 }
 
 //display popup for delete all tasks
-function delall_popup() {
+function display_popup_for_delete_all_tasks() {
   document.getElementById("tasks").style.display = "none";
-  document.getElementById("delallpopup").style.display = "block";
-  document.querySelector(".unibuttons").style.display = "none";
+  document.getElementById("delete_all_tasks_popup").style.display = "block";
+  document.querySelector(".main_buttons").style.display = "none";
 }
 
 //close popup for delete all tasks
-function close_delall() {
+function close_popup_for_delete_all_tasks() {
   document.getElementById("tasks").style.display = "block";
-  document.getElementById("delallpopup").style.display = "none";
-  document.querySelector(".unibuttons").style.display = "block";
+  document.getElementById("delete_all_tasks_popup").style.display = "none";
+  document.querySelector(".main_buttons").style.display = "block";
 }
 
 //mark task as complete
-function marktask(y) {
+function change_task_status(y) {
   if (data[y].status == "Not Complete") {
     data[y].status = "Complete";
   } else {
     data[y].status = "Not Complete";
   }
   localStorage.setItem("data", JSON.stringify(data));
-  createtasks();
+  display_tasks();
 }
 
 //delete all tasks
-function delall() {
+function delete_all_tasks() {
+  localStorage.clear();
   data = [];
-  localStorage.setItem("data", JSON.stringify(data));
 
   document.getElementById("tasks").style.display = "block";
-  document.getElementById("delallpopup").style.display = "none";
-  document.querySelector(".unibuttons").style.display = "block";
-  clear_fields(); //clear input fields
-  createtasks();
+  document.getElementById("delete_all_tasks_popup").style.display = "none";
+  document.querySelector(".main_buttons").style.display = "block";
+  clear_input_fields(); //clear input fields
+  document.getElementById("tasks").innerHTML = "";
   alert("To-do list has been cleared.");
 }
 
 //delete individual task
-function deltask(id) {
+function delete_individual_tasks(id) {
   data.splice(id, 1);
-  localStorage.setItem("data", JSON.stringify(data));
+  if (data.length == 0) {
+    localStorage.clear();
+    data = [];
+  } else {
+    localStorage.setItem("data", JSON.stringify(data));
+  }
   console.log(data);
-  createtasks();
+  display_tasks();
 }
 
 //View tasks
 function view_task(id) {
-  //edits being made
 
   document.getElementById("tasks").style.display = "none";
-  document.querySelector(".unibuttons").style.display = "none";
-  document.getElementById("viewtasks").style.display = "block";
+  document.querySelector(".main_buttons").style.display = "none";
+  document.getElementById("view_tasks").style.display = "block";
 
-  document.getElementById("viewtitle").innerHTML = data[id].title;
-  document.getElementById("viewduedate").innerHTML = data[id].duedate;
-  document.getElementById("viewpriority").innerHTML = data[id].priority;
-  document.getElementById("viewstatus").innerHTML = data[id].status;
+  document.getElementById("view_title").innerHTML = data[id].title;
+  document.getElementById("view_due_date").innerHTML = data[id].due_date;
+  document.getElementById("view_priority").innerHTML = data[id].priority;
+  document.getElementById("view_status").innerHTML = data[id].status;
 }
 //close view task popup
-function close_viewtasks() {
+function close_view_task_popup() {
   document.getElementById("tasks").style.display = "block";
-  document.querySelector(".unibuttons").style.display = "block";
-  document.getElementById("viewtasks").style.display = "none";
+  document.querySelector(".main_buttons").style.display = "block";
+  document.getElementById("view_tasks").style.display = "none";
 }
 
-function popup() {
+function display_popup() {
   document.getElementById("tasks").style.display = "none";
 
   document.getElementById("popup1").style.display = "block";
-  document.querySelector(".unibuttons").style.display = "none";
+  document.querySelector(".main_buttons").style.display = "none";
 }
 
-function closepopup() {
+function close_popup() {
   document.getElementById("tasks").style.display = "block";
 
   document.getElementById("popup1").style.display = "none";
-  document.querySelector(".unibuttons").style.display = "block";
+  document.querySelector(".main_buttons").style.display = "block";
 }
 //toggle between 'add ask' and 'edit task' forms
 function toggle_on() {
-  document.getElementById("edittask").style.display = "block";
-  document.getElementById("savetask").style.display = "none";
-  document.getElementById("popupid").style.display = "none";
-  document.getElementById("popup_editid").style.display = "block";
+  document.getElementById("edit_task").style.display = "block";
+  document.getElementById("save_task").style.display = "none";
+  document.getElementById("add_task_popup").style.display = "none";
+  document.getElementById("edit_task_popup").style.display = "block";
 }
 //toggle between 'edit task' and 'add task' forms
 function toggle_off() {
-  document.getElementById("edittask").style.display = "none";
-  document.getElementById("savetask").style.display = "block";
-  document.getElementById("popupid").style.display = "block";
-  document.getElementById("popup_editid").style.display = "none";
+  document.getElementById("edit_task").style.display = "none";
+  document.getElementById("save_task").style.display = "block";
+  document.getElementById("add_task_popup").style.display = "block";
+  document.getElementById("edit_task_popup").style.display = "none";
 }
 
 //edit task
 function edit_task(y) {
   toggle_on();
-  popup();
-  document.getElementById("inputString").value = data[y].title;
+  display_popup();
+  document.getElementById("input-string").value = data[y].title;
   document.getElementById("priority").value = data[y].priority;
-  document.getElementById("selectedDate").value = data[y].duedate;
+  document.getElementById("selectedDate").value = data[y].due_date;
   index = y;
 }
 
 //edit task wrapper
 function edit() {
-  data[index].title = document.getElementById("inputString").value;
+  data[index].title = document.getElementById("input-string").value;
   data[index].priority = document.getElementById("priority").value;
-  data[index].duedate = document.getElementById("selectedDate").value;
+  data[index].due_date = document.getElementById("selectedDate").value;
   localStorage.setItem("data", JSON.stringify(data));
-  clear_fields(); //clear input fields
+  clear_input_fields(); //clear input fields
 
   document.getElementById("tasks").style.display = "block";
 
   document.getElementById("popup1").style.display = "none";
-  document.querySelector(".unibuttons").style.display = "block";
+  document.querySelector(".main_buttons").style.display = "block";
   toggle_off();
-  createtasks();
+  display_tasks();
 }
 
 //displaying tasks
-let createtasks = () => {
+let display_tasks = () => {
   console.log(data);
   tasks.innerHTML = "";
   data.map((x, y) => {
-    tasks.innerHTML += `<div class = 'taskItems' id =${y}><span id ="task_text${y}" class="task_text" onclick='marktask(${y})'>
+    tasks.innerHTML += `<div class = 'taskItems' id =${y}><span id ="task_text${y}" class="task_text" onclick='change_task_status(${y})'>
     ${x.title}</span>
     <span class="option_buttons">
-            <span class = 'taskviewbutton' onclick = 'view_task(${y})'>View</span>
-            <span class ='taskdelbutton' onclick = 'deltask(${y})'>X</span>
-            <span class = 'taskeditbutton' onclick="edit_task(${y})">Edit</span>
+            <span class = 'task_view_button' onclick = 'view_task(${y})'>View</span>
+            <span class ='task_del_button' onclick = 'delete_individual_tasks(${y})'>X</span>
+            <span class = 'task_edit_button' onclick="edit_task(${y})">Edit</span>
 
     </span>
      </div>`;
 
-    //setting colour based on priority
+    //setting color based on priority
     if (x.priority == "high") {
       document.getElementById(y).style.borderBlockColor = "red";
     } else if (x.priority == "medium") {
@@ -164,26 +200,25 @@ let createtasks = () => {
   });
 };
 
-function addtask() {
+function add_task() {
   //event.preventDefault();
   console.log(data);
-  let title = document.getElementById("inputString").value;
+  let title = document.getElementById("input-string").value;
   let priority = document.getElementById("priority").value;
-  let duedate = document.getElementById("selectedDate").value;
+  let due_date = document.getElementById("selectedDate").value;
 
   let status = "Not Complete"; //default task status = not complete
 
-  clear_fields(); // clear input fields
+  clear_input_fields(); // clear input fields
 
   //testing local storage
   data.push({
     title: title,
     priority: priority,
-    duedate: duedate,
+    due_date: due_date,
     status: status,
   });
   localStorage.setItem("data", JSON.stringify(data));
 
-  data = JSON.parse(localStorage.getItem("data"));
-  createtasks();
+  display_tasks();
 }
