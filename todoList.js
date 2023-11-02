@@ -1,36 +1,11 @@
-tasks = document.getElementById("tasks");
 let index;
+let edit_task_in_progress = false
 let data = [];
 
 if (localStorage.getItem("data") != null) {
   data = JSON.parse(localStorage.getItem("data"));
 
-  tasks.innerHTML = "";
-  data.map((x, y) => {
-    tasks.innerHTML += `<div class = 'taskItems' id =${y}><span id ="task_text${y}" class="task_text" onclick='change_task_status(${y})'>
-    ${x.title}</span>
-    <span class="option_buttons">
-            <span class = 'task_view_button' onclick = 'view_task(${y})'>View</span>
-            <span class ='task_del_button' onclick = 'delete_individual_tasks(${y})'>X</span>
-            <span class = 'task_edit_button' onclick="edit_task(${y})">Edit</span>
-
-    </span>
-     </div>`;
-
-    //setting color based on priority
-    if (x.priority == "high") {
-      document.getElementById(y).style.borderBlockColor = "red";
-    } else if (x.priority == "medium") {
-      document.getElementById(y).style.borderBlockColor = "orange";
-    } else if (x.priority == "low") {
-      document.getElementById(y).style.borderBlockColor = "grey";
-    }
-    if (x.status == "Complete") {
-      document.getElementById(`task_text${y}`).style.textDecoration =
-        "line-through";
-      document.getElementById(`task_text${y}`).style.fontStyle = "italic";
-    }
-  });
+  display_tasks();
 }
 
 form.addEventListener("submit", (e) => {
@@ -72,7 +47,7 @@ function change_task_status(y) {
 
 //delete all tasks
 function delete_all_tasks() {
-  localStorage.clear();
+  localStorage.removeItem('data');
   data = [];
 
   document.getElementById("tasks").style.display = "block";
@@ -87,7 +62,7 @@ function delete_all_tasks() {
 function delete_individual_tasks(id) {
   data.splice(id, 1);
   if (data.length == 0) {
-    localStorage.clear();
+    localStorage.removeItem('data');
     data = [];
   } else {
     localStorage.setItem("data", JSON.stringify(data));
@@ -123,6 +98,9 @@ function display_popup() {
 }
 
 function close_popup() {
+  if(edit_task_in_progress){toggle_off(); edit_task_in_progress = false;
+  clear_input_fields();}
+  
   document.getElementById("tasks").style.display = "block";
 
   document.getElementById("popup1").style.display = "none";
@@ -145,6 +123,7 @@ function toggle_off() {
 
 //edit task
 function edit_task(y) {
+  edit_task_in_progress = true;
   toggle_on();
   display_popup();
   document.getElementById("input-string").value = data[y].title;
@@ -165,12 +144,13 @@ function edit() {
 
   document.getElementById("popup1").style.display = "none";
   document.querySelector(".main_buttons").style.display = "block";
+  edit_task_in_progress = false
   toggle_off();
   display_tasks();
 }
 
 //displaying tasks
-let display_tasks = () => {
+let display_tasks = function(){
   console.log(data);
   tasks.innerHTML = "";
   data.map((x, y) => {
