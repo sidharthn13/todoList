@@ -1,6 +1,7 @@
 let index;
+let flag;             //used to toggle between delete item and delete all operations
 let edit_task_in_progress = false
-let data = [];
+let data = [];        //this variable is re-declared in another part of the program 
 const color_map = {high:"red",medium:"orange",low:'grey'}
 
 if (localStorage.getItem("data") != null) {
@@ -23,10 +24,12 @@ function clear_input_fields() {
 }
 
 //display popup for delete all tasks
-function display_popup_for_delete_all_tasks() {
+function display_popup_for_delete_all_tasks(id) {
   document.getElementById("tasks").style.display = "none";
   document.getElementById("delete_all_tasks_popup").style.display = "block";
   document.querySelector(".main_buttons").style.display = "none";
+  flag = id
+
 }
 
 //close popup for delete all tasks
@@ -49,15 +52,21 @@ function change_task_status(y) {
 
 //delete all tasks
 function delete_all_tasks() {
+  if(flag == 'delete_all'){
   localStorage.removeItem('data');
   data = [];
 
+  
+  clear_input_fields(); //clear input fields
+  document.getElementById("tasks").innerHTML = "";
+  alert("To-do list has been cleared.");}
+
+  else{
+    delete_individual_tasks(flag);
+  }
   document.getElementById("tasks").style.display = "block";
   document.getElementById("delete_all_tasks_popup").style.display = "none";
   document.querySelector(".main_buttons").style.display = "block";
-  clear_input_fields(); //clear input fields
-  document.getElementById("tasks").innerHTML = "";
-  alert("To-do list has been cleared.");
 }
 
 //delete individual task
@@ -195,7 +204,7 @@ function display_tasks (){
     ${x.title}</span>
     <span class="option_buttons">
             <span class = 'task_view_button' onclick = 'view_task(${y})'>View</span>
-            <span class ='task_del_button' onclick = 'delete_individual_tasks(${y})'>X</span>
+            <span class ='task_del_button' onclick = 'display_popup_for_delete_all_tasks(${y})'>X</span>
             <span class = 'task_edit_button' onclick="edit_task(${y})">Edit</span>
 
     </span>
