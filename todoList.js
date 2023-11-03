@@ -200,9 +200,12 @@ function display_tasks (){
   console.log(data);
   tasks.innerHTML = "";
   data.map((x, y) => {
-    tasks.innerHTML += `<div class = 'taskItems' id =${y}><span id ="task_text${y}" class="task_text" onclick='change_task_status(${y})'>
+    tasks.innerHTML += `<div class = 'taskItems' id =${y}><span id ="task_text${y}" class="task_text" >
     ${x.title}</span>
     <span class="option_buttons">
+            <span  ><button id ='checkbox${y}' type = 'checkbox' onclick = 'change_task_status(${y})'
+            style="  width:20px;height: 35px;border-radius: 50px;right: 150px;position:absolute;
+            "></button></span>
             <span class = 'task_view_button' onclick = 'view_task(${y})'>View</span>
             <span class ='task_del_button' onclick = 'display_popup_for_delete_all_tasks(${y})'>X</span>
             <span class = 'task_edit_button' onclick="edit_task(${y})">Edit</span>
@@ -218,6 +221,14 @@ function display_tasks (){
       document.getElementById(`task_text${y}`).style.textDecoration =
         "line-through";
       document.getElementById(`task_text${y}`).style.fontStyle = "italic";
+      document.getElementById(`checkbox${y}`).style.backgroundColor = 'green'
+      document.getElementById(`checkbox${y}`).style.position = 'absolute'
+      document.getElementById(`checkbox${y}`).style.height = '35px'
+      document.getElementById(`checkbox${y}`).style.right = '150'
+      document.getElementById(`checkbox${y}`).style.borderRadius = '50px'
+      document.getElementById(`checkbox${y}`).style.width = '30px'
+
+
     }
   });
 };
