@@ -150,7 +150,7 @@ function edit() {
 }
 
 //displaying tasks
-let display_tasks = function(){
+function display_tasks (){
   console.log(data);
   tasks.innerHTML = "";
   data.map((x, y) => {
