@@ -1,12 +1,12 @@
 let index;
-let flag;             //used to toggle between delete item and delete all operations
-let edit_task_in_progress = false
-let data = [];        //this variable is re-declared in another part of the program 
-const color_map = {high:"red",medium:"orange",low:'grey'}
+let flag; //used to toggle between delete item and delete all operations
+let edit_task_in_progress = false;
+let data = []; //this variable is re-declared in another part of the program
+const color_map = { high: "red", medium: "orange", low: "grey" };
 
 if (localStorage.getItem("data") != null) {
   data = JSON.parse(localStorage.getItem("data"));
-
+  sort_data(); // call sort function here
   display_tasks();
 }
 
@@ -20,7 +20,7 @@ function clear_input_fields() {
   document.getElementById("input-string").value = "";
   document.getElementById("priority").value = "";
   document.getElementById("selectedDate").value = "";
-  document.getElementById('selected_time').value = "";
+  document.getElementById("selected_time").value = "";
 }
 
 //display popup for delete all tasks
@@ -28,8 +28,7 @@ function display_popup_for_delete_all_tasks(id) {
   document.getElementById("tasks").style.display = "none";
   document.getElementById("delete_all_tasks_popup").style.display = "block";
   document.querySelector(".main_buttons").style.display = "none";
-  flag = id
-
+  flag = id;
 }
 
 //close popup for delete all tasks
@@ -52,16 +51,14 @@ function change_task_status(y) {
 
 //delete all tasks
 function delete_all_tasks() {
-  if(flag == 'delete_all'){
-  localStorage.removeItem('data');
-  data = [];
+  if (flag == "delete_all") {
+    localStorage.removeItem("data");
+    data = [];
 
-  
-  clear_input_fields(); //clear input fields
-  document.getElementById("tasks").innerHTML = "";
-  alert("To-do list has been cleared.");}
-
-  else{
+    clear_input_fields(); //clear input fields
+    document.getElementById("tasks").innerHTML = "";
+    alert("To-do list has been cleared.");
+  } else {
     delete_individual_tasks(flag);
   }
   document.getElementById("tasks").style.display = "block";
@@ -72,8 +69,12 @@ function delete_all_tasks() {
 //delete individual task
 function delete_individual_tasks(id) {
   data.splice(id, 1);
+
+  //call sort function here
+  sort_data();
+
   if (data.length == 0) {
-    localStorage.removeItem('data');
+    localStorage.removeItem("data");
     data = [];
   } else {
     localStorage.setItem("data", JSON.stringify(data));
@@ -84,7 +85,6 @@ function delete_individual_tasks(id) {
 
 //View tasks
 function view_task(id) {
-
   document.getElementById("tasks").style.display = "none";
   document.querySelector(".main_buttons").style.display = "none";
   document.getElementById("view_tasks").style.display = "block";
@@ -94,7 +94,6 @@ function view_task(id) {
   document.getElementById("view_due_time").innerHTML = data[id].due_time;
   document.getElementById("view_priority").innerHTML = data[id].priority;
   document.getElementById("view_status").innerHTML = data[id].status;
-  
 }
 //close view task popup
 function close_view_task_popup() {
@@ -111,39 +110,44 @@ function display_popup() {
 }
 
 //check if all input fields are filled
-function check_input_fields(){
-  if(document.getElementById("input-string").value == "" ||
+function check_input_fields() {
+  if (
+    document.getElementById("input-string").value == "" ||
     document.getElementById("task_priority").value == "" ||
-    document.getElementById('selectedDate').value =="" ||
-    document.getElementById('selected_time').value == ""){return false;}
-  else{return true;}
+    document.getElementById("selectedDate").value == "" ||
+    document.getElementById("selected_time").value == ""
+  ) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 //close edit task/save task popups when 'X' icon is pressed
 function close_popup() {
-  if(edit_task_in_progress){toggle_off(); edit_task_in_progress = false;}
-    
+  if (edit_task_in_progress) {
+    toggle_off();
+    edit_task_in_progress = false;
+  }
+
   document.getElementById("tasks").style.display = "block";
 
   document.getElementById("popup1").style.display = "none";
   document.querySelector(".main_buttons").style.display = "block";
-  clear_input_fields()
-  }
-  
-
-//function that gets executed when save button is pressed
-  function close_popup_on_save() {
- 
-  if(check_input_fields()){  
-  document.getElementById("tasks").style.display = "block";
-
-  document.getElementById("popup1").style.display = "none";
-  document.querySelector(".main_buttons").style.display = "block";
-  }
-  else{
-        alert('Please fill in all details');}
+  clear_input_fields();
 }
 
+//function that gets executed when save button is pressed
+function close_popup_on_save() {
+  if (check_input_fields()) {
+    document.getElementById("tasks").style.display = "block";
+
+    document.getElementById("popup1").style.display = "none";
+    document.querySelector(".main_buttons").style.display = "block";
+  } else {
+    alert("Please fill in all details");
+  }
+}
 
 //toggle between 'add ask' and 'edit task' forms
 function toggle_on() {
@@ -170,33 +174,37 @@ function edit_task(y) {
   document.getElementById("selectedDate").value = data[y].due_date;
   document.getElementById("selected_time").value = data[y].due_time;
 
-
   index = y;
 }
 
 //function that gets executed when update button is pressed
 function edit() {
-  if(check_input_fields()){
-  data[index].title = document.getElementById("input-string").value;
-  data[index].priority = document.getElementById("priority").value;
-  data[index].due_date = document.getElementById("selectedDate").value;
-  data[index].due_time = document.getElementById('selected_time').value;
-  localStorage.setItem("data", JSON.stringify(data));
-  clear_input_fields(); //clear input fields
+  if (check_input_fields()) {
+    data[index].title = document.getElementById("input-string").value;
+    data[index].priority = document.getElementById("priority").value;
+    data[index].due_date = document.getElementById("selectedDate").value;
+    data[index].due_time = document.getElementById("selected_time").value;
 
-  document.getElementById("tasks").style.display = "block";
+    // call sort function here
+    sort_data();
 
-  document.getElementById("popup1").style.display = "none";
-  document.querySelector(".main_buttons").style.display = "block";
-  edit_task_in_progress = false
-  toggle_off();
-  display_tasks();}
-  else{
-  alert('Please fill in all details')}
+    localStorage.setItem("data", JSON.stringify(data));
+    clear_input_fields(); //clear input fields
+
+    document.getElementById("tasks").style.display = "block";
+
+    document.getElementById("popup1").style.display = "none";
+    document.querySelector(".main_buttons").style.display = "block";
+    edit_task_in_progress = false;
+    toggle_off();
+    display_tasks();
+  } else {
+    alert("Please fill in all details");
+  }
 }
 
 //displaying tasks
-function display_tasks (){
+function display_tasks() {
   console.log(data);
   tasks.innerHTML = "";
   data.map((x, y) => {
@@ -214,24 +222,22 @@ function display_tasks (){
      </div>`;
 
     //setting color based on priority
-    
+
     document.getElementById(y).style.borderBlockColor = color_map[x.priority];
 
     if (x.status == "Complete") {
       document.getElementById(`task_text${y}`).style.textDecoration =
         "line-through";
       document.getElementById(`task_text${y}`).style.fontStyle = "italic";
-      document.getElementById(`checkbox${y}`).style.backgroundColor = 'green'
-      document.getElementById(`checkbox${y}`).style.position = 'absolute'
-      document.getElementById(`checkbox${y}`).style.height = '35px'
-      document.getElementById(`checkbox${y}`).style.right = '150'
-      document.getElementById(`checkbox${y}`).style.borderRadius = '50px'
-      document.getElementById(`checkbox${y}`).style.width = '30px'
-
-
+      document.getElementById(`checkbox${y}`).style.backgroundColor = "green";
+      document.getElementById(`checkbox${y}`).style.position = "absolute";
+      document.getElementById(`checkbox${y}`).style.height = "35px";
+      document.getElementById(`checkbox${y}`).style.right = "150";
+      document.getElementById(`checkbox${y}`).style.borderRadius = "50px";
+      document.getElementById(`checkbox${y}`).style.width = "30px";
     }
   });
-};
+}
 
 function add_task() {
   //event.preventDefault();
@@ -253,7 +259,18 @@ function add_task() {
     due_time: due_time,
     status: status,
   });
-  localStorage.setItem("data", JSON.stringify(data));
 
+  //call sort function
+  sort_data();
+
+  localStorage.setItem("data", JSON.stringify(data));
   display_tasks();
+}
+
+function sort_data() {
+  data = data.sort(
+    (a, b) =>
+      new Date(a.due_date + " " + a.due_time) -
+      new Date(b.due_date + " " + b.due_time)
+  );
 }

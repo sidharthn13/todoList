@@ -104,7 +104,7 @@ body {
   font-family: cupcake;
   font-size: 33px;
   cursor: crosshair;
-  position:relative;            /* edits made here */
+  position: relative; /* edits made here */
 }
 .task_text {
   position: absolute;
@@ -199,7 +199,7 @@ body {
 #selectedDate {
   border-radius: 10px;
 }
-#selected_time{
+#selected_time {
   border-radius: 10px;
 }
 
@@ -267,4 +267,3 @@ body {
   cursor: pointer;
   border: 2px solid black;
 }
-
