@@ -1,6 +1,7 @@
 let index;
 let edit_task_in_progress = false
 let data = [];
+const color_map = {high:"red",medium:"orange",low:'grey'}
 
 if (localStorage.getItem("data") != null) {
   data = JSON.parse(localStorage.getItem("data"));
@@ -165,13 +166,9 @@ function display_tasks (){
      </div>`;
 
     //setting color based on priority
-    if (x.priority == "high") {
-      document.getElementById(y).style.borderBlockColor = "red";
-    } else if (x.priority == "medium") {
-      document.getElementById(y).style.borderBlockColor = "orange";
-    } else if (x.priority == "low") {
-      document.getElementById(y).style.borderBlockColor = "grey";
-    }
+    
+    document.getElementById(y).style.borderBlockColor = color_map[x.priority];
+
     if (x.status == "Complete") {
       document.getElementById(`task_text${y}`).style.textDecoration =
         "line-through";
