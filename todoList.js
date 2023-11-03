@@ -191,8 +191,8 @@ function edit() {
   edit_task_in_progress = false
   toggle_off();
   display_tasks();}
-  
-  alert('Please fill in all details')
+  else{
+  alert('Please fill in all details')}
 }
 
 //displaying tasks
