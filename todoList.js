@@ -101,15 +101,41 @@ function display_popup() {
   document.querySelector(".main_buttons").style.display = "none";
 }
 
+//check if all input fields are filled
+function check_input_fields(){
+  if(document.getElementById("input-string").value == "" ||
+    document.getElementById("task_priority").value == "" ||
+    document.getElementById('selectedDate').value =="" ||
+    document.getElementById('selected_time').value == ""){return false;}
+  else{return true;}
+}
+
+//close edit task/save task popups when 'X' icon is pressed
 function close_popup() {
-  if(edit_task_in_progress){toggle_off(); edit_task_in_progress = false;
-  clear_input_fields();}
-  
+  if(edit_task_in_progress){toggle_off(); edit_task_in_progress = false;}
+    
   document.getElementById("tasks").style.display = "block";
 
   document.getElementById("popup1").style.display = "none";
   document.querySelector(".main_buttons").style.display = "block";
+  clear_input_fields()
+  }
+  
+
+//function that gets executed when save button is pressed
+  function close_popup_on_save() {
+ 
+  if(check_input_fields()){  
+  document.getElementById("tasks").style.display = "block";
+
+  document.getElementById("popup1").style.display = "none";
+  document.querySelector(".main_buttons").style.display = "block";
+  }
+  else{
+        alert('Please fill in all details');}
 }
+
+
 //toggle between 'add ask' and 'edit task' forms
 function toggle_on() {
   document.getElementById("edit_task").style.display = "block";
@@ -139,8 +165,9 @@ function edit_task(y) {
   index = y;
 }
 
-//edit task wrapper
+//function that gets executed when update button is pressed
 function edit() {
+  if(check_input_fields()){
   data[index].title = document.getElementById("input-string").value;
   data[index].priority = document.getElementById("priority").value;
   data[index].due_date = document.getElementById("selectedDate").value;
@@ -154,7 +181,9 @@ function edit() {
   document.querySelector(".main_buttons").style.display = "block";
   edit_task_in_progress = false
   toggle_off();
-  display_tasks();
+  display_tasks();}
+  
+  alert('Please fill in all details')
 }
 
 //displaying tasks
