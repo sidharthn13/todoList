@@ -198,6 +198,9 @@ body {
 #selectedDate {
   border-radius: 10px;
 }
+#selected_time{
+  border-radius: 10px;
+}
 
 #delete_all_tasks_popup {
   width: 50vh;

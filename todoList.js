@@ -19,6 +19,7 @@ function clear_input_fields() {
   document.getElementById("input-string").value = "";
   document.getElementById("priority").value = "";
   document.getElementById("selectedDate").value = "";
+  document.getElementById('selected_time').value = "";
 }
 
 //display popup for delete all tasks
@@ -81,8 +82,10 @@ function view_task(id) {
 
   document.getElementById("view_title").innerHTML = data[id].title;
   document.getElementById("view_due_date").innerHTML = data[id].due_date;
+  document.getElementById("view_due_time").innerHTML = data[id].due_time;
   document.getElementById("view_priority").innerHTML = data[id].priority;
   document.getElementById("view_status").innerHTML = data[id].status;
+  
 }
 //close view task popup
 function close_view_task_popup() {
@@ -130,6 +133,9 @@ function edit_task(y) {
   document.getElementById("input-string").value = data[y].title;
   document.getElementById("priority").value = data[y].priority;
   document.getElementById("selectedDate").value = data[y].due_date;
+  document.getElementById("selected_time").value = data[y].due_time;
+
+
   index = y;
 }
 
@@ -138,6 +144,7 @@ function edit() {
   data[index].title = document.getElementById("input-string").value;
   data[index].priority = document.getElementById("priority").value;
   data[index].due_date = document.getElementById("selectedDate").value;
+  data[index].due_time = document.getElementById('selected_time').value;
   localStorage.setItem("data", JSON.stringify(data));
   clear_input_fields(); //clear input fields
 
@@ -183,6 +190,7 @@ function add_task() {
   let title = document.getElementById("input-string").value;
   let priority = document.getElementById("priority").value;
   let due_date = document.getElementById("selectedDate").value;
+  let due_time = document.getElementById("selected_time").value;
 
   let status = "Not Complete"; //default task status = not complete
 
@@ -193,6 +201,7 @@ function add_task() {
     title: title,
     priority: priority,
     due_date: due_date,
+    due_time: due_time,
     status: status,
   });
   localStorage.setItem("data", JSON.stringify(data));
