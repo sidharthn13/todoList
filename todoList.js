@@ -205,14 +205,14 @@ function edit() {
 
 //displaying tasks
 function display_tasks() {
-  console.log(data);
+
   tasks.innerHTML = "";
   data.map((x, y) => {
     tasks.innerHTML += `<div class = 'taskItems' id =${y}><span id ="task_text${y}" class="task_text" >
     ${x.title}</span>
     <span class="option_buttons">
             <span  ><button id ='checkbox${y}' type = 'checkbox' onclick = 'change_task_status(${y})'
-            style="  width:20px;height: 35px;border-radius: 50px;right: 150px;position:absolute;
+            style="  width:30px;height: 35px;border-radius: 50px;right: 150px;position:absolute;
             "></button></span>
             <span class = 'task_view_button' onclick = 'view_task(${y})'>View</span>
             <span class ='task_del_button' onclick = 'display_popup_for_delete_all_tasks(${y})'>X</span>
@@ -241,7 +241,7 @@ function display_tasks() {
 
 function add_task() {
   //event.preventDefault();
-  console.log(data);
+  
   let title = document.getElementById("input-string").value;
   let priority = document.getElementById("priority").value;
   let due_date = document.getElementById("selectedDate").value;

@@ -19,14 +19,14 @@
             <p2 id='edit_task_popup'>Edit task</p2>
         </span>
         <span><button type="button" id='close_popup_button' onclick="close_popup()">X</button></span>
-
+        <div>
         <form id='form'>
-            <div id='task_title'>
+            <div id='task_title' class="task_entries">
                 <label for="input-string" class='labels'>Title:</label>
                 <input type="text" id="input-string" name="input-string" maxlength="46" required>
             </div>
 
-            <div id='task_priority'>
+            <div id='task_priority' class="task_entries">
                 <label class='labels' for="priority">Priority :</label>
                 <select id="priority" name="priority" required>
                     <option value="high">High</option>
@@ -35,12 +35,12 @@
                 </select>
             </div>
 
-            <div id='task_due_date'>
+            <div id='task_due_date' class="task_entries">
                 <label class="labels" for="selectedDate">Due date :</label>
                 <input type="date" id="selectedDate" name="selectedDate" required>
             </div>
 
-            <div id="task_due_time">
+            <div id="task_due_time" class="task_entries">
                 <label class="labels" for="selected_time">Due time:</label>
                 <input type="time" id="selected_time" name="selected_time" required>
             </div>
@@ -49,7 +49,7 @@
 
             <!--edit button-->
             <button type='button' id='edit_task' onclick="edit()">Update</button>
-
+        </div>
     </div>
 
 
@@ -65,12 +65,12 @@
     </div>
 
     <div id='view_tasks'>
-        <div>Task title: <span id=view_title></span></div>
-        <div>Task due-date: <span id=view_due_date></span></div>
-        <div>Task due-time: <span id="view_due_time"></span></div>
-        <div>Task status: <span id=view_status></span></div>
-        <div>Task priority: <span id=view_priority></span></div>
-        <span id=close_view_tasks onclick='close_view_task_popup()'>CLOSE</span>
+        <div class="view_task_items">Task title  : <span id=view_title class ='view_details'></span></div>
+        <div class="view_task_items">Task due-date  : <span id=view_due_date class ='view_details'></span></div>
+        <div class="view_task_items">Task due-time  : <span id="view_due_time" class ='view_details'></span></div>
+        <div class="view_task_items">Task status  : <span id=view_status class ='view_details'></span></div>
+        <div>Task priority  : <span id=view_priority class ='view_details'></span></div>
+        <div><span id=close_view_tasks onclick='close_view_task_popup()'>CLOSE</span></div>
 
     </div>
 

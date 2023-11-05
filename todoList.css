@@ -160,16 +160,15 @@ body {
   width: 40px;
   height: 40px;
   font-size: 20px;
-  position: absolute;
-  left: 0px;
   border-radius: 10px;
   font-family: cupcake;
+  float:right;
 }
 
 #form {
   position: absolute;
   left: 140px;
-  top: 100px;
+  top: 70px;
 }
 #edit_task_popup {
   font-size: 40px;
@@ -187,8 +186,10 @@ body {
   display: none;
 }
 .labels {
-  font-family: headingFont;
+  font-family: cupcake;
   font-size: 28px;
+  font-weight: bold;
+
 }
 #input-string {
   border-radius: 10px;
@@ -218,11 +219,13 @@ body {
   display: none;
   font-family: cupcake;
   font-size: 40px;
+  margin-left: 35%;
 }
 #save_task {
   display: block;
   font-family: cupcake;
   font-size: 40px;
+  margin-left: 35%;
 }
 #add_task_popup {
   display: block;
@@ -230,6 +233,7 @@ body {
 #edit_task_popup {
   display: none;
   font-size: 30px;
+  
 }
 
 /*delete-all popup and buttons */
@@ -259,11 +263,28 @@ body {
   font-family: cupcake;
   font-size: 30px;
   color: black;
+  padding:30px;
+  position:fixed;
+  top:20vh;
 }
 #close_view_tasks {
+  
   border-radius: 10px;
   background-color: red;
   font-family: cupcake;
   cursor: pointer;
   border: 2px solid black;
+  
+}
+
+.view_details{
+  margin-left: 10px;
+}
+
+.view_task_items{
+  margin-bottom: 5px;
+}
+
+.task_entries{
+  margin-bottom: 10px;
 }
